@@ -1,4 +1,5 @@
-import { generateSnapshot } from '@sugarlabs/musicblocks-v4-lib';
+import { generateFromSnapshot, generateSnapshot } from '@sugarlabs/musicblocks-v4-lib';
+import { ITreeSnapshot } from '@sugarlabs/musicblocks-v4-lib/@types/syntaxTree';
 // import { ITreeSnapshot, ITreeSnapshotInput } from '@sugarlabs/musicblocks-v4-lib/@types/syntaxTree';
 
 const saveProjectTemplate =
@@ -44,13 +45,22 @@ export function loadProject(event: Event): void {
         console.log(input['files'][0]);
         readFileContent(input['files'][0])
             .then((content) => {
-                console.log(content);
+                let temp2 = content as string;
+                let position = temp2.indexOf('<div class="code">');
+                let position2 = temp2.indexOf(
+                    '</div></div></div></div><script type="text/javascript">',
+                );
+                let temp3 = temp2?.slice(position + 18, position2);
+                let temp4 = JSON.parse(temp3);
+                console.log(temp4);
+                generateFromSnapshot(temp4 as ITreeSnapshot);
+                console.log(generateSnapshot());
             })
             .catch((error) => console.log(error));
     }
 }
 
-function readFileContent(file: Blob) {
+function readFileContent(file: Blob): Promise<null | string | ArrayBuffer> {
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
         reader.onload = (event) => resolve(event.target!.result);
