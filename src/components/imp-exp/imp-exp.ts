@@ -39,5 +39,22 @@ export function saveProjectHTML(): void {
 }
 
 export function loadProject(event: Event): void {
-    console.log(event);
+    const input = event.target;
+    if ('files' in input! && input['files']['length'] == 1) {
+        console.log(input['files'][0]);
+        readFileContent(input['files'][0])
+            .then((content) => {
+                console.log(content);
+            })
+            .catch((error) => console.log(error));
+    }
+}
+
+function readFileContent(file: Blob) {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+        reader.onload = (event) => resolve(event.target!.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsText(file);
+    });
 }

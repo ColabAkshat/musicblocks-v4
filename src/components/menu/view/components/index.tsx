@@ -56,7 +56,7 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
         .then(() => (element.children[1] as SVGElement).classList.add('menu-btn-img'));
     };
 
-    loadSVG(btnLoadProjectRef.current! as HTMLElement, svgSaveProject);
+    // loadSVG(btnLoadProjectRef.current! as HTMLElement, svgSaveProject);
     loadSVG(btnSaveProjectRef.current! as HTMLElement, svgSaveProject);
     loadSVG(btnRunRef.current! as HTMLElement, svgRun);
     loadSVG(btnStopRef.current! as HTMLElement, svgStop);
@@ -66,9 +66,9 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
   return (
     <>
       <input type="file" className="menu-btn" ref={btnLoadProjectRef}>
-        <p className="menu-btn-label">
+        {/* <p className="menu-btn-label">
           <span>{_labels.loadProject}</span>
-        </p>
+        </p> */}
       </input>
       <button className="menu-btn" ref={btnSaveProjectRef}>
         <p className="menu-btn-label">
