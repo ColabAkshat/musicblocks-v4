@@ -65,7 +65,7 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
 
   return (
     <>
-      <input type="file" className="menu-btn" ref={btnLoadProjectRef}>
+      <input type="file" className="menu-btn" ref={btnLoadProjectRef} accept="text/html">
         {/* <p className="menu-btn-label">
           <span>{_labels.loadProject}</span>
         </p> */}
