@@ -65,11 +65,13 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
 
   return (
     <>
-      <input type="file" className="menu-btn" ref={btnLoadProjectRef} accept="text/html">
-        {/* <p className="menu-btn-label">
+      <label className="menu-btn-label">
+        <input type="file" className="menu-btn" ref={btnLoadProjectRef} accept="text/html">
+          {/* <p className="menu-btn-label">
           <span>{_labels.loadProject}</span>
         </p> */}
-      </input>
+        </input>
+      </label>
       <button className="menu-btn" ref={btnSaveProjectRef}>
         <p className="menu-btn-label">
           <span>{_labels.saveProject}</span>
