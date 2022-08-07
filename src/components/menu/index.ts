@@ -36,6 +36,8 @@ export function setup(): Promise<void> {
     });
 }
 
+export function mountHook(name: 'startRecording', callback: CallableFunction): void;
+export function mountHook(name: 'stopRecording', callback: CallableFunction): void;
 export function mountHook(name: 'exportDrawing', callback: CallableFunction): void;
 export function mountHook(name: 'loadProject', callback: CallableFunction): void;
 export function mountHook(name: 'saveProject', callback: CallableFunction): void;
@@ -48,7 +50,11 @@ export function mountHook(name: 'reset', callback: CallableFunction): void;
  */
 export function mountHook(name: string, callback: CallableFunction): void {
     const buttons = getButtons();
-    if (name == 'exportDrawing') {
+    if (name == 'startRecording') {
+        buttons.startRecording.addEventListener('click', () => callback());
+    } else if (name == 'stopRecording') {
+        buttons.stopRecording.addEventListener('click', () => callback());
+    } else if (name == 'exportDrawing') {
         buttons.exportDrawing.addEventListener('click', () => callback());
     } else if (name == 'loadProject') {
         buttons.loadProject.addEventListener('change', (event) => callback(event));

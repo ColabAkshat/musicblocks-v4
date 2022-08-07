@@ -16,6 +16,8 @@ import './index.scss';
 
 let _container: HTMLElement;
 let _labels: {
+  startRecording: string;
+  stopRecording: string;
   exportDrawing: string;
   loadProject: string;
   saveProject: string;
@@ -25,6 +27,8 @@ let _labels: {
 };
 let _states: { running: boolean } = { running: false };
 
+let _btnStartRecording: HTMLButtonElement;
+let _btnStopRecording: HTMLButtonElement;
 let _btnExportDrawing: HTMLButtonElement;
 let _btnLoadProject: HTMLInputElement;
 let _btnSaveProject: HTMLButtonElement;
@@ -42,6 +46,8 @@ let _mountedCallback: CallableFunction;
  * @returns root JSX element of the Menu component
  */
 function Menu(props: { states: { running: boolean } }): JSX.Element {
+  const btnStartRecordingRef = useRef(null);
+  const btnStopRecordingRef = useRef(null);
   const btnExportDrawingRef = useRef(null);
   const btnLoadProjectRef = useRef(null);
   const btnSaveProjectRef = useRef(null);
@@ -50,6 +56,8 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
   const btnResetRef = useRef(null);
 
   useEffect(() => {
+    _btnStartRecording = btnStartRecordingRef.current!;
+    _btnStopRecording = btnStopRecordingRef.current!;
     _btnExportDrawing = btnExportDrawingRef.current!;
     _btnLoadProject = btnLoadProjectRef.current!;
     _btnSaveProject = btnSaveProjectRef.current!;
@@ -66,6 +74,8 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
         .then(() => (element.children[1] as SVGElement).classList.add('menu-btn-img'));
     };
 
+    loadSVG(btnStartRecordingRef.current! as HTMLElement, svgRun);
+    loadSVG(btnStopRecordingRef.current! as HTMLElement, svgRun);
     loadSVG(btnExportDrawingRef.current! as HTMLElement, svgRun);
     // loadSVG(btnLoadProjectRef.current! as HTMLElement, svgSaveProject);
     loadSVG(btnSaveProjectRef.current! as HTMLElement, svgSaveProject);
@@ -76,6 +86,16 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
 
   return (
     <>
+      <button className="menu-btn" ref={btnStartRecordingRef}>
+        <p className="menu-btn-label">
+          <span>{_labels.startRecording}</span>
+        </p>
+      </button>
+      <button className="menu-btn" ref={btnStopRecordingRef}>
+        <p className="menu-btn-label">
+          <span>{_labels.stopRecording}</span>
+        </p>
+      </button>
       <button className="menu-btn" ref={btnExportDrawingRef}>
         <p className="menu-btn-label">
           <span>{_labels.exportDrawing}</span>
@@ -139,6 +159,8 @@ export function setup(
   container: HTMLElement,
   props: {
     labels: {
+      startRecording: string;
+      stopRecording: string;
       exportDrawing: string;
       loadProject: string;
       saveProject: string;
@@ -148,6 +170,8 @@ export function setup(
     };
   },
 ): Promise<{
+  btnStartRecording: HTMLButtonElement;
+  btnStopRecording: HTMLButtonElement;
   btnExportDrawing: HTMLButtonElement;
   btnLoadProject: HTMLInputElement;
   btnSaveProject: HTMLButtonElement;
@@ -164,6 +188,8 @@ export function setup(
     _mountedCallback = () =>
       requestAnimationFrame(() => {
         resolve({
+          btnStartRecording: _btnStartRecording,
+          btnStopRecording: _btnStopRecording,
           btnExportDrawing: _btnExportDrawing,
           btnLoadProject: _btnLoadProject,
           btnSaveProject: _btnSaveProject,
