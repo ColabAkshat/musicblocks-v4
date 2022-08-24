@@ -6,7 +6,6 @@ import { setup as setupComponent } from './components';
 
 // -- private variables ----------------------------------------------------------------------------
 
-let _btnUploadFileInLocalStorage: HTMLInputElement;
 let _btnStartRecording: HTMLButtonElement;
 let _btnStopRecording: HTMLButtonElement;
 let _btnExportDrawing: HTMLButtonElement;
@@ -32,7 +31,6 @@ export function setup(): Promise<void> {
 
         setupComponent(menu, {
             labels: {
-                uploadFileInLocalStorage: 'Upload a file',
                 startRecording: 'Start animation Recording',
                 stopRecording: 'Stop animation Recording',
                 exportDrawing: 'Save mouse artwork as PNG',
@@ -44,7 +42,6 @@ export function setup(): Promise<void> {
             },
         }).then(
             ({
-                btnUploadFileInLocalStorage,
                 btnStartRecording,
                 btnStopRecording,
                 btnExportDrawing,
@@ -55,7 +52,6 @@ export function setup(): Promise<void> {
                 btnStop,
             }) => {
                 [
-                    _btnUploadFileInLocalStorage,
                     _btnStartRecording,
                     _btnStopRecording,
                     _btnExportDrawing,
@@ -65,7 +61,6 @@ export function setup(): Promise<void> {
                     _btnStop,
                     _btnReset,
                 ] = [
-                    btnUploadFileInLocalStorage,
                     btnStartRecording,
                     btnStopRecording,
                     btnExportDrawing,
@@ -82,10 +77,9 @@ export function setup(): Promise<void> {
 }
 
 /**
- * @returns DOM `uploadFileInLocalStorage` `startRecording` `stopRecording` `exportDrawing`,`loadProject`,`saveProject`,`run`, `stop`, and `reset` buttons
+ * @returns DOM `exportDrawing`,`loadProject`,`saveProject`,`run`, `stop`, and `reset` buttons
  */
 export function getButtons(): {
-    uploadFileInLocalStorage: HTMLInputElement;
     startRecording: HTMLButtonElement;
     stopRecording: HTMLButtonElement;
     exportDrawing: HTMLButtonElement;
@@ -96,7 +90,6 @@ export function getButtons(): {
     reset: HTMLButtonElement;
 } {
     return {
-        uploadFileInLocalStorage: _btnUploadFileInLocalStorage,
         startRecording: _btnStartRecording,
         stopRecording: _btnStopRecording,
         exportDrawing: _btnExportDrawing,

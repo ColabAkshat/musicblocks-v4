@@ -36,7 +36,6 @@ export function setup(): Promise<void> {
     });
 }
 
-export function mountHook(name: 'uploadFileInLocalStorage', callback: CallableFunction): void;
 export function mountHook(name: 'startRecording', callback: CallableFunction): void;
 export function mountHook(name: 'stopRecording', callback: CallableFunction): void;
 export function mountHook(name: 'exportDrawing', callback: CallableFunction): void;
@@ -52,9 +51,7 @@ export function mountHook(name: 'reset', callback: CallableFunction): void;
  */
 export function mountHook(name: string, callback: CallableFunction): void {
     const buttons = getButtons();
-    if (name == 'uploadFileInLocalStorage') {
-        buttons.uploadFileInLocalStorage.addEventListener('change', (event) => callback(event));
-    } else if (name == 'startRecording') {
+    if (name == 'startRecording') {
         buttons.startRecording.addEventListener('click', () => callback());
     } else if (name == 'stopRecording') {
         buttons.stopRecording.addEventListener('click', () => callback());

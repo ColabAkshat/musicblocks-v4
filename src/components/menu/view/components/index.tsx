@@ -19,7 +19,6 @@ import './index.scss';
 
 let _container: HTMLElement;
 let _labels: {
-  uploadFileInLocalStorage: string;
   startRecording: string;
   stopRecording: string;
   exportDrawing: string;
@@ -31,7 +30,6 @@ let _labels: {
 };
 let _states: { running: boolean } = { running: false };
 
-let _btnUploadFileInLocalStorage: HTMLInputElement;
 let _btnStartRecording: HTMLButtonElement;
 let _btnStopRecording: HTMLButtonElement;
 let _btnExportDrawing: HTMLButtonElement;
@@ -51,7 +49,6 @@ let _mountedCallback: CallableFunction;
  * @returns root JSX element of the Menu component
  */
 function Menu(props: { states: { running: boolean } }): JSX.Element {
-  const btnUploadFileInLocalStorageRef = useRef(null);
   const btnStartRecordingRef = useRef(null);
   const btnStopRecordingRef = useRef(null);
   const btnExportDrawingRef = useRef(null);
@@ -62,7 +59,6 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
   const btnResetRef = useRef(null);
 
   useEffect(() => {
-    _btnUploadFileInLocalStorage = btnUploadFileInLocalStorageRef.current!;
     _btnStartRecording = btnStartRecordingRef.current!;
     _btnStopRecording = btnStopRecordingRef.current!;
     _btnExportDrawing = btnExportDrawingRef.current!;
@@ -93,18 +89,6 @@ function Menu(props: { states: { running: boolean } }): JSX.Element {
 
   return (
     <>
-      <label className="menu-input-btn-label">
-        <input
-          type="file"
-          className="menu-btn"
-          ref={btnUploadFileInLocalStorageRef}
-          multiple={true}
-        >
-          {/* <p className="menu-btn-label">
-            <span>{_labels.uploadFileInLocalStorage}</span>
-          </p> */}
-        </input>
-      </label>
       <button className="menu-btn" ref={btnStartRecordingRef}>
         <p className="menu-btn-label">
           <span>{_labels.startRecording}</span>
@@ -178,7 +162,6 @@ export function setup(
   container: HTMLElement,
   props: {
     labels: {
-      uploadFileInLocalStorage: string;
       startRecording: string;
       stopRecording: string;
       exportDrawing: string;
@@ -190,7 +173,6 @@ export function setup(
     };
   },
 ): Promise<{
-  btnUploadFileInLocalStorage: HTMLInputElement;
   btnStartRecording: HTMLButtonElement;
   btnStopRecording: HTMLButtonElement;
   btnExportDrawing: HTMLButtonElement;
@@ -209,7 +191,6 @@ export function setup(
     _mountedCallback = () =>
       requestAnimationFrame(() => {
         resolve({
-          btnUploadFileInLocalStorage: _btnUploadFileInLocalStorage,
           btnStartRecording: _btnStartRecording,
           btnStopRecording: _btnStopRecording,
           btnExportDrawing: _btnExportDrawing,
